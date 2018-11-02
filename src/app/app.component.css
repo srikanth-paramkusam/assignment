@@ -1,0 +1,7 @@
+.active {
+    color: blue
+}
+
+a:hover {
+    text-decoration: none
+}

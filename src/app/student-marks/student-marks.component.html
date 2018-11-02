@@ -1,0 +1,26 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-6"><b>Student Result Board</b></h1>
+</div>
+
+<div class="card-deck mb-3 text-center" *ngIf="isDataLoaded">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr style="font-style:italic">
+        <th scope="col">#</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">Roll Number</th>
+        <th scope="col">Total Marks</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-success" *ngFor="let student of studentsList | sort : 'name';let i = index" [ngClass]="{'table-danger': student.status === 'fail','table-success': student.status === 'pass' && student.totalMarks === toperMarks}">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ student.name | titlecase }}</td>
+        <td>{{ student.rollNumber }}</td>
+        <td>{{ student.totalMarks }}</td>
+        <td>{{ (student.totalMarks === toperMarks ? 'topper' : student.status) | uppercase }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

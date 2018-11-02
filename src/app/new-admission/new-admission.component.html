@@ -1,0 +1,67 @@
+<div class="jumbotron">
+  <h1 class="display-6">Register Student</h1>
+  <hr/>
+  <form [formGroup]="newStudentForm" *ngIf="!isSubmitForm">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputName " class="control-label">First Name</label>
+        <input type="text" formControlName="firstname" class="form-control" id="inputName" placeholder="First Name">
+        <div *ngIf="!newStudentForm.get('firstname').valid && newStudentForm.get('firstname').touched">
+          <span class="error" *ngIf="newStudentForm.get('firstname').hasError('required')">First name can't be blank</span>
+          <span class="error" *ngIf="newStudentForm.get('firstname').hasError('pattern')">Only accepts letters</span>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputLastName " class="control-label">Last Name</label>
+        <input type="text" formControlName="lastname" class="form-control" id="inputLastName" placeholder="Last Name">
+        <div *ngIf="!newStudentForm.get('lastname').valid && newStudentForm.get('lastname').touched">
+          <span class="error" *ngIf="newStudentForm.get('lastname').hasError('required')">Last name can't be blank</span>
+          <span class="error" *ngIf="newStudentForm.get('lastname').hasError('pattern')">Only accepts letters</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputClass " class="control-label">Class</label>
+        <input type="text" formControlName="class" placeholder="Class" class="form-control" id="inputClass">
+        <div *ngIf="!newStudentForm.get('class').valid && newStudentForm.get('class').touched">
+          <span class="error" *ngIf="newStudentForm.get('class').hasError('required')">Class can't be blank</span>
+          <span class="error" *ngIf="newStudentForm.get('class').hasError('pattern')">Only accepts format like(class-section).ex: 5A</span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputPassYear " class="control-label">Year</label>
+        <input type="number" [min]="1980" [max]="2017" formControlName="yearofpassing" placeholder="Till 2017" class="form-control"
+          id="inputPassYear">
+        <div *ngIf="!newStudentForm.get('yearofpassing').valid && newStudentForm.get('yearofpassing').touched">
+          <span class="error" *ngIf="newStudentForm.get('yearofpassing').hasError('required')">Year can't be blank</span>
+          <span class="error" *ngIf="newStudentForm.get('yearofpassing').hasError('max')">Max year till 2017</span>
+          <span class="error" *ngIf="newStudentForm.get('yearofpassing').hasError('min')">Min year required 1980</span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputPercentage " class="control-label">Percentage</label>
+        <input type="text" formControlName="percentage" placeholder="Marks %" class="form-control" id="inputPercentage">
+        <div *ngIf="!newStudentForm.get('percentage').valid && newStudentForm.get('percentage').touched">
+          <span class="error" *ngIf="newStudentForm.get('percentage').hasError('required')">Percentage can't be blank</span>
+          <span class="error" *ngIf="newStudentForm.get('percentage').hasError('max')">Max 100 percentage</span>
+          <span class="error" *ngIf="newStudentForm.get('percentage').hasError('min')">Min 0 percentage</span>
+        </div>
+      </div>
+    </div>
+    <p class="float-right">
+      <button type="submit" class="btn btn-secondary" (click)="newStudentForm.reset()">Reset</button>&nbsp;
+      <button type="submit" class="btn btn-primary" (click)="submitForm()" [disabled]="!newStudentForm.valid">Submit</button>
+    </p>
+    <div class="clearfix"></div>
+  </form>
+  <div *ngIf="isSubmitForm">
+    <div class="alert alert-success text-center" role="alert">
+      Thank you for registering the new student.
+    </div>
+    <p class="float-right">
+      <button type="button" class="btn btn-primary" (click)="newStudentForm.reset();isSubmitForm = false">Add Another</button>
+    </p>
+    <div class="clearfix"></div>
+  </div>
+</div>
